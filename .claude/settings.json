@@ -1,0 +1,39 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Browser",
+      "mcp__claude-in-chrome"
+    ]
+  },
+  "enableWorkflows": true,
+  "enabledPlugins": {
+    "worktrunk@worktrunk": true
+  },
+  "extraKnownMarketplaces": {
+    "worktrunk": {
+      "source": {
+        "source": "github",
+        "repo": "max-sixty/worktrunk"
+      }
+    }
+  },
+  "outputStyle": "Concise",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "autoCompactWindow": 400000
+    },
+    "claude-sonnet-5-5": {
+      "autoCompactWindow": 375000
+    },
+    "claude-fable-5-1": {
+      "autoCompactWindow": 450000
+    }
+  },
+  "skipWorkflowUsageWarning": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
+}
