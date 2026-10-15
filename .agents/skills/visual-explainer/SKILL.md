@@ -8,19 +8,32 @@ description: Build or update an HTML explanation page with diagrams, code views,
 Build one HTML page that lets the reader understand the topic and decide quickly. Keep the short
 answer, its reason, and any decision in chat; put the detail on the page.
 
+## Design the explanation
+
+1. Identify the question the reader needs to answer. For a code change, inspect the changed behavior
+   and enough surrounding code to explain its cause. For a research result or model, identify its
+   evidence and assumptions. Link the relevant sources instead of giving a general repository tour.
+2. Choose the visual from the relationship: message order, timing, data flow, physical placement,
+   or a comparison. Read [the diagram guide](references/diagrams.md) when designing a figure; it
+   has selection criteria and worked SVG examples. Use text or a table when it communicates better.
+3. Give each figure a specific claim. Show the mechanism that supports it, label arrows with actions,
+   and attach quantities and units to what they measure. Keep node positions and scales consistent
+   across comparisons. Distinguish observed results, inferred behavior, and illustrative models.
+4. Add interaction when it helps the reader examine a sequence, change, or assumption. Define what
+   each control changes and keep the diagram, values, and explanation consistent. Show a useful
+   complete state before interaction; support keyboard use and respect reduced motion.
+
 ## Content
 
 - Put the result, any decision or next action, material risks, and unresolved requirements first.
-  Do not put them in collapsed sections.
+  Show the core explanation before long background. Do not put required information in collapsed
+  sections.
 - Organize the sections around the user's question. There is no fixed section sequence.
 - Put optional background in native `<details><summary>…</summary>…</details>` blocks. Keep a brief
-  definition in the main text when the conclusion depends on it. Write only background that is
-  relevant to the current question.
-- Use a diagram for a relationship or flow. Add a control only when changing a value, step, or
-  option shows behavior. Use text or a table when it is sufficient.
-- For a code change, link the relevant files or commits and read enough source to explain the
-  behavior. Do not give a general repository tour.
-- Avoid decorative animation and a figure for every fact.
+  definition in the main text when the conclusion depends on it. Write only relevant background.
+- Keep the figure and its explanation together. Use a caption that states what the figure shows.
+  Put detailed evidence nearby or link to it. Do not repeat every label in prose.
+- Avoid decorative animation and a figure for every fact. A number does not always need a chart.
 - Add a quiz only when the user asks for one.
 
 ## Location and format
@@ -28,29 +41,31 @@ answer, its reason, and any decision in chat; put the detail on the page.
 - Keep one page per topic. On follow-up, update the relevant section and keep the path and anchors
   stable.
 - Save the page where the user or the project instructions say. Otherwise, use the session's
-  scratch directory if the client names one; if not, omit `-o` and the renderer writes a new file
-  under `/tmp`. Keep review pages outside production documentation unless the user asks to include
-  them.
+  scratch directory if the client names one; if not, use `/tmp/YYYY-MM-DD-explanation-<topic>.html`.
+  Choose an unused path for a new page. Keep review pages outside production documentation unless
+  the user asks to include them.
 - Make each explanation in one format. If the user asks for a native page, such as a Claude
   artifact or a ChatGPT Page, and that tool accepts an HTML file, publish the rendered file with
   it. Do not make a second page with the same content. Local file links do not work on a published
   page; link files and commits by web URL.
 
-## Render
+## Render and check
 
-Run the renderer by its full path, `python3 <skill-dir>/scripts/render.py`, where `<skill-dir>` is
-the directory that contains this `SKILL.md`. A path relative to the project directory does not work.
+1. For a new page, copy [assets/starter.html](assets/starter.html) to the output path and replace
+   its example title and body. Its CSS, theme switch, and code highlighter are editable starting
+   points. For an existing page, edit it in place rather than replacing it with the starter.
+2. Write HTML/CSS and SVG directly. Use JavaScript for browser interaction and JSON for optional
+   data or model parameters. Python or another available tool can perform calculations or repeated
+   generation before delivery; there is no required page schema or rendering command.
+3. Keep CSS, JavaScript, and required assets inline. Put escaped source in
+   `<pre><code class="language-…">`. Use the relevant [interaction example](references/interactions.md)
+   for controls, with unique IDs and scripts after their markup. Keep core content readable without
+   JavaScript and hide custom controls until they initialize. The diagram guide's examples use the
+   starter's theme variables. Mermaid text alone will not render without its library.
+4. Check that each figure supports its caption and agrees with the source evidence. Verify units,
+   direction, ordering, and comparison scales. If a browser tool is available, inspect the changed
+   sections at a normal and narrow width in both themes. Check readable labels, arrow endpoints,
+   clipping, contrast, and any custom controls with the keyboard. Keep wide figures readable in a
+   scroll region instead of shrinking their labels. State any check you could not perform.
 
-1. Run `python3 <skill-dir>/scripts/render.py --help` when you need the JSON schema or the
-   presentation classes.
-2. Write the JSON spec. Put escaped source in `<pre><code class="language-…">`. For a diagram, use
-   the renderer classes (`.diagram`, `.flow`, `.box`, `.arrow`) or inline SVG that uses
-   `currentColor` or page variables such as `var(--accent)`. The page loads no external scripts,
-   so Mermaid and chart-library code do not render.
-3. Render with `python3 <skill-dir>/scripts/render.py <spec.json> -o <page.html>`. To update this
-   task's page, use the same path with `--force`, and keep the spec beside the page.
-4. If a browser tool can open the page, check the new or changed sections at a narrow width. Check
-   keyboard operation only for custom controls that you added.
-
-Reply with the short answer and the page's absolute path or link. State any check that you could
-not do.
+Reply with the short answer and the page's absolute path or link.
