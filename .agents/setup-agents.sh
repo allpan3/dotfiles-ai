@@ -58,6 +58,7 @@ link_set() {
         fi
         printf 'Linked %s -> %s\n' "$target" "${paths[$i]}"
     done
+    printf 'Skills ready: %s (%d skills)\n' "$destination" "$((last - first))"
 }
 
 link_file() {
@@ -67,6 +68,7 @@ link_file() {
         return 1
     fi
     if [[ -L "$target" && "$target" -ef "$source" ]]; then
+        printf 'Already linked: %s\n' "$target"
         return
     fi
     if [[ -e "$target" || -L "$target" ]]; then
@@ -88,6 +90,7 @@ main() (
     local root general total destination physical previous agent i status=0
     local names=() paths=() destinations=() starts=() ends=() checked=()
     root=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+    printf 'Setting up agents from %s\n' "$root"
     shopt -s nullglob
     [[ -f "$root/AGENTS.md" ]] || { printf 'Missing shared AGENTS.md\n' >&2; return 1; }
     [[ -d "$root/skills" ]] || { printf 'Missing skills directory\n' >&2; return 1; }
@@ -105,6 +108,7 @@ main() (
     general=${#names[@]}
     [[ ! -d "$root/t3/skills" ]] || collect_skills "$root/t3/skills"
     total=${#names[@]}
+    printf 'Found %d general skills and %d T3-only skills.\n' "$general" "$((total - general))"
 
     destinations=("$HOME/.claude/skills" "$HOME/.claude-t3/skills" "$HOME/.codex-t3/skills")
     starts=(0 0 "$general")
@@ -157,6 +161,11 @@ main() (
         set -e
     done
     link_file "$HOME/.claude/settings.json" "$HOME/.claude-t3/settings.json" || status=1
+    if [[ "$status" == 0 ]]; then
+        printf 'Agent setup complete. All required links are ready.\n'
+    else
+        warn 'Agent setup incomplete. See the errors above.'
+    fi
     return "$status"
 )
 
