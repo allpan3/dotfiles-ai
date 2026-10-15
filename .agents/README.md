@@ -6,7 +6,8 @@ Codex. No plugin installation is needed.
 ## Layout
 
 - `skills/` contains general skills for regular and T3 sessions.
-- `t3/skills/` contains T3-only skills. It is currently empty of skills.
+- `t3/skills/` contains T3-only skills.
+- `t3/models.md` assigns models to T3 roles, including the review panel.
 - `setup-agents.sh` creates T3 homes and links skills and shared instructions.
 
 Skills can be grouped in nested folders. Each skill folder must have a unique name across both
@@ -73,18 +74,56 @@ reloaded or its session restarted.
 | `unslop`            | Automatic or explicit |
 | `visual-explainer`  | Automatic or explicit |
 | `reviewable-coding` | Explicit only         |
+| `interrogate` | Explicit only, in T3 |
+| `how` | Explicit only, in T3 |
+| `why` | Explicit only, in T3 |
 
 Use `/unslop` in Claude or `$unslop` in Codex, and similarly for the other names. Automatic use
 depends on the task matching the skill's description. T3-only skills must check for the required T3
 tools before performing orchestration.
 
+Invoke `interrogate` explicitly with `/interrogate` in Claude or `$interrogate`
+in Codex for adversarial or multi-model code review.
+It reads the `interrogate reviewers` line directly from `~/.agents/t3/models.md`
+on each invocation.
+That line controls the independent reviewer slots. The shared model table
+provides ordered fallbacks; every Opus job can fall back to Sol. A fallback
+that duplicates an existing panel model is reported as reduced diversity,
+not counted as another independent review.
+
+Invoke `how` explicitly with `/how` in Claude or `$how` in Codex for codebase
+explanations. It reads the `how explorer` and `how explainer` assignments from
+`~/.agents/t3/models.md`. Routine exploration uses Sonnet, and straightforward
+explanation uses Luna. More demanding work uses Opus with Sol as fallback.
+T3 capabilities and actual task results determine which targets can run.
+
+Invoke `why` explicitly with `/why` in Claude or `$why` in Codex to investigate
+why code was designed or changed. It reads the `why investigators` and
+`why synthesizer` assignments from `~/.agents/t3/models.md`. Both use Opus,
+with Sol as fallback. It searches available evidence categories in parallel
+and separates documented reasons from inferences and unresolved questions.
+
 ## Attribution
 
-`unslop` is adapted from
-[Cursor's pstack](https://github.com/cursor/plugins/blob/main/pstack/skills/unslop/SKILL.md). Its
-[MIT license](skills/unslop/LICENSE) is included with the skill.
+- `unslop` is adapted from
+  [Cursor's pstack](https://github.com/cursor/plugins/blob/main/pstack/skills/unslop/SKILL.md).
+- `visual-explainer` builds on
+  [Geoffrey Litt's explain-diff-html](https://gist.github.com/geoffreylitt/a29df1b5f9865506e8952488eac3d524#file-explain-diff-html-md),
+  [Ankit's implementation](https://gist.github.com/ankitg12/8e808d387799de4e9839bc393f8e6405),
+  and [Nico Bailon's visual-explainer](https://github.com/nicobailon/visual-explainer).
+- `interrogate` is adapted from
+  [chhoumann/t3-pstack](https://github.com/chhoumann/t3-pstack/tree/main/plugins/pstack/skills/interrogate).
 
-`visual-explainer` builds on Geoffrey Litt's
-[`explain-diff-html` skill](https://gist.github.com/geoffreylitt/a29df1b5f9865506e8952488eac3d524#file-explain-diff-html-md).
-Its renderer workflow is inspired by
-[Ankit's explain-diff implementation](https://gist.github.com/ankitg12/8e808d387799de4e9839bc393f8e6405).
+- `how` is adapted from
+  [chhoumann/t3-pstack](https://github.com/chhoumann/t3-pstack/tree/main/plugins/pstack/skills/how).
+  Its description, exploration workflow, and two prompt templates are unchanged.
+  Local changes provide T3 capability checks, shared model assignments, explicit-only
+  Codex metadata, and standalone delegation guidance. Its [MIT license](t3/skills/how/LICENSE)
+  is included.
+
+- `why` is adapted from
+  [chhoumann/t3-pstack](https://github.com/chhoumann/t3-pstack/tree/main/plugins/pstack/skills/why).
+  Its description, investigation workflow, and upstream reference files are unchanged.
+  Local changes provide T3 capability checks, shared model assignments, explicit-only
+  Codex metadata, and standalone delegation guidance. Its [MIT license](t3/skills/why/LICENSE)
+  is included.
