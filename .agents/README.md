@@ -94,6 +94,7 @@ the repository.
 | Skill               | Invocation            |
 | ------------------- | --------------------- |
 | `unslop`            | Automatic or explicit |
+| `technical-writing` | Automatic or explicit |
 | `visual-explainer`  | Automatic or explicit |
 | `reviewable-coding` | Explicit only         |
 | `grilling`         | Explicit only         |
@@ -105,6 +106,12 @@ the repository.
 Use `/unslop` in Claude or `$unslop` in Codex, and similarly for the other names. Automatic use
 depends on the task matching the skill's description. T3-only skills must check for the required T3
 tools before performing orchestration.
+
+Use `technical-writing` to plan and revise substantial technical documents and presentation
+content. Its four-stage workflow covers purpose and evidence, planning, structural revision, and
+final delivery, with completion checks and worked examples. It complements `unslop`, which handles
+wording and AI patterns. Use available format-specific skills to produce and inspect documents or
+slides. Shared writing guidance covers routine chat and small wording edits.
 
 Invoke `interrogate` explicitly with `/interrogate` in Claude or `$interrogate` in Codex for
 adversarial or multi-model code review. It reads the `interrogate reviewers` line directly from
@@ -135,6 +142,12 @@ Sonnet for routine work and Opus otherwise, with the shared model sheet's fallba
 
 ## Attribution
 
+- `technical-writing` is a local workflow informed by
+  [Matt Pocock's writing-shape](https://github.com/mattpocock/skills/blob/main/skills/in-progress/writing-shape/SKILL.md),
+  [writing-for-agents](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md),
+  and [Cursor pstack's technical-writing](https://github.com/cursor/plugins/blob/main/pstack/skills/technical-writing/SKILL.md).
+  It uses reader prerequisites and structural review without the interactive paragraph approval
+  loop, fixed sentence lengths, or mandatory document categories.
 - `unslop` is adapted from
   [Cursor's pstack](https://github.com/cursor/plugins/blob/main/pstack/skills/unslop/SKILL.md).
 - `visual-explainer` builds on
