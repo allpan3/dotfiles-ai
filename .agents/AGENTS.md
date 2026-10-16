@@ -48,6 +48,10 @@ work incrementally. Start with a simple implementation that meets the current re
 introduce abstractions as concrete needs emerge. Don't build general frameworks or speculative
 flexibility for problems we haven't encountered.
 
+Do not add `schema_version`, `format_version`, or similar version fields by default.
+Introduce format versioning only for a concrete compatibility or migration requirement,
+and explain that need. Do not add versioning just to track edits; use Git history.
+
 Keep each implementation step as simple as practical, without sacrificing correctness or
 readability. Refactor when the growing complexity justifies it, rather than trying to design the
 final architecture from the beginning. If you see a likely future improvement that isn't justified
