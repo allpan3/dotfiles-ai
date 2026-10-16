@@ -20,6 +20,8 @@ Every Opus job can fall back to Sol, including roles added later.
 - how explainer: Opus; use Luna for routine work.
 - why investigators: Opus
 - why synthesizer: Opus
+- grilling explorer: Opus; use Sonnet for routine work.
+- research worker: Opus; use Sonnet for routine work.
 
 Routine work means bounded file or symbol lookup, direct call tracing, or a straightforward
 explanation of unambiguous code. Use Opus for cross-system reasoning, conflicting evidence, subtle

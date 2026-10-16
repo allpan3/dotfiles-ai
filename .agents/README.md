@@ -96,9 +96,11 @@ the repository.
 | `unslop`            | Automatic or explicit |
 | `visual-explainer`  | Automatic or explicit |
 | `reviewable-coding` | Explicit only         |
+| `grilling`         | Explicit only         |
 | `interrogate`       | Explicit only, in T3  |
 | `how`               | Explicit only, in T3  |
 | `why`               | Explicit only, in T3  |
+| `research`          | Explicit only, in T3  |
 
 Use `/unslop` in Claude or `$unslop` in Codex, and similarly for the other names. Automatic use
 depends on the task matching the skill's description. T3-only skills must check for the required T3
@@ -120,6 +122,16 @@ Invoke `why` explicitly with `/why` in Claude or `$why` in Codex to investigate 
 designed or changed. It reads the `why investigators` and `why synthesizer` assignments from
 `~/.agents/t3/models.md`. Both use Opus, with Sol as fallback. It searches available evidence
 categories in parallel and separates documented reasons from inferences and unresolved questions.
+
+Invoke `grilling` explicitly with `/grilling` in Claude or `$grilling` in Codex to
+work through a plan or design. The parent conducts the interview. Fact-finding uses
+T3 delegation when available, with the `grilling explorer` role in the shared model
+sheet. Other sessions use native subagents, or direct inspection if none are available.
+
+Invoke `research` explicitly with `/research` in Claude or `$research` in Codex in T3.
+It delegates primary-source research to one background agent and saves cited findings
+in a Markdown note using the repository's conventions. The `research worker` role uses
+Sonnet for routine work and Opus otherwise, with the shared model sheet's fallbacks.
 
 ## Attribution
 
@@ -143,3 +155,15 @@ categories in parallel and separates documented reasons from inferences and unre
   Its description, investigation workflow, and upstream reference files are unchanged. Local changes
   provide T3 capability checks, shared model assignments, explicit-only Codex metadata, and
   standalone delegation guidance. Its [MIT license](t3/skills/why/LICENSE) is included.
+
+- `grilling` is adapted from
+  [Matt Pocock's skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md).
+  Its description and interview procedure are unchanged. Local additions make invocation
+  explicit-only and select T3 or native delegation. Its [MIT license](skills/grilling/LICENSE)
+  is included.
+
+- `research` is adapted from
+  [Matt Pocock's skills](https://github.com/mattpocock/skills/blob/main/skills/engineering/research/SKILL.md).
+  Its description and three-step research procedure are unchanged. Local additions make
+  invocation explicit-only and use T3 delegation with the shared model sheet.
+  Its [MIT license](t3/skills/research/LICENSE) is included.
