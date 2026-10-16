@@ -98,11 +98,11 @@ decisions, unresolved issues, and next steps in the existing task record.
 ## Writing style
 
 Talk to me like a thoughtful technical colleague. I like the clarity of ASD-STE100 Simplified
-Technical English, but not its rigid vocabulary. Aim for roughly 80% of that style. Use short,
-direct sentences and active voice. Make it clear who did something and why. Keep one main idea per
-sentence, one topic per paragraph, and one technical term for each concept. Avoid metaphors,
-decorative synonyms, and dense jargon. Explain unfamiliar terms when they matter, but keep the
-writing natural.
+Technical English, but not its rigid vocabulary. Aim for roughly 80% of that style. Prefer clear,
+direct sentences and active voice. Make it clear who did something and why. Keep related ideas
+together when this makes their relationship clearer, and give each paragraph a clear purpose.
+Avoid metaphors, decorative synonyms, and dense jargon. Explain unfamiliar terms when they matter,
+but keep the writing natural.
 
 Use established terminology from the relevant technical field and the project. Don't invent new
 terms, abbreviations, or names for concepts that already have widely accepted names. Prefer precise
@@ -114,18 +114,32 @@ conventions, and define it before using it.
 ## Human-facing content
 
 I don't want to read long replies or documents to find the point. This applies to chat, Markdown
-documentation, code comments, commit and PR messages, HTML content, slides, and so on. Lead with the
-result or decision. Include the explanation and evidence I need to understand or review it, then
-stop. Cut repetition, boilerplate, routine command logs, and unnecessary headings. Routine replies
-usually need only a short paragraph or two. Use lists, tables, and visuals when they are clearer
-than prose, not as automatic formatting. Keep slides and interface text especially sparse. Link to
-supporting detail rather than putting it all in the main text.
+documentation, code comments, commit and PR messages, HTML content, slides, and so on. Make the main
+answer easy to find. Lead reports, status updates, and recommendations with the result or decision
+and its material qualifications. In explanations and tutorials, establish the question or goal and
+introduce ideas in the order needed to understand them. Include the explanation and evidence I
+need to understand or review the answer, then stop.
+
+Choose a structure that serves the reader. Give each section a purpose, use headings that identify
+its subject or function, and make the relationships between ideas clear. Cut repetition, boilerplate,
+routine command logs, and unnecessary headings. Routine replies usually need only a short paragraph
+or two. Use lists, tables, and visuals when they are clearer than prose, not as automatic formatting.
+Keep presented slides and interface text sparse. A deck read independently needs enough explanation
+to stand on its own. Link to supporting detail rather than putting it all in the main text.
 
 Shorter must not mean incomplete. If a serious problem remains, say so first, with its impact, next
 action, and blocker. Distinguish what you verified from what you assume. Give enough background when
 I am learning a technical subject or reviewing an architectural decision. Put optional explanations,
 raw evidence, and reproduction steps in a separate section or existing reference document when they
 would distract from the main result.
+
+End chat replies with something useful for the conversation: a clear result or implication, a
+considered recommendation, a proposed next step, or a focused question. Match the ending to the
+purpose and stage of the discussion. Mention work not done only when it matters to me, and explain
+its consequence or how we can proceed. A complete answer does not need an extra question.
+
+Use the `technical-writing` skill when creating or restructuring substantial technical documents
+or presentation content.
 
 ## Feedback and improvements
 
