@@ -7,7 +7,31 @@ description: Write or revise reader-facing prose to remove formulaic phrasing, f
 
 Edit text to remove AI patterns. Scan for the patterns below, then rewrite. Preserve meaning and match the intended tone.
 
-Also apply these rules to your own text for a reader: replies, documents, comments, commit messages, and PR descriptions. Apply them while you write the final text. Do not write a separate draft in your reasoning to edit it. Do not apply these rules to your reasoning.
+Apply these rules to text the user will read: replies, documents, comments, commit messages and
+PR descriptions. For documents, finish the draft and then review the actual text in a separate
+pass before delivery. Revise the issues found and reread the changed passages in context. Direct
+chat responses can skip the separate pass. These rules apply to the text, not the reasoning used
+to produce it.
+
+## Check meaning before polishing wording
+
+A passage can avoid the patterns below and still be difficult to understand. Read it on its own
+and identify any question the reader needs answered but cannot answer from the preceding text.
+Name the missing context or relationship; repeating an unclear label does not explain it.
+Resolve that gap before making individual word substitutions. Leave adequate prose unchanged.
+
+Use conventional terms for the subject. Replace an unnecessary invented label with an ordinary
+phrase; retain precise technical terms and explain them when the reader needs help. Expand a list
+or chain of nouns when it hides who does what, which decision is being made, or why a result follows.
+Do not turn this check into a ban on technical vocabulary, compound terms or necessary detail.
+
+Read the revised paragraph as a whole. Check that a change of subject is stated before terminology
+from the new topic appears; do not add definitions merely to compensate for missing context.
+Preserve conditions, quantities and uncertainty. Remove wording that adds no meaning; add context
+or explanation only where it is missing. A clearer revision can be shorter, similar in length or
+longer. For substantial technical content, use `technical-writing` for explanation and terminology
+guidance when available. Verify technical corrections against their sources; an editorial
+comment does not establish that a source claim is wrong.
 
 ## Patterns to detect and fix
 
@@ -20,7 +44,7 @@ Also apply these rules to your own text for a reader: replies, documents, commen
 
 3. **AI vocabulary.** Additionally, crucial, delve, enduring, enhance, fostering, garner, interplay, intricate, landscape (abstract), pivotal, showcase, tapestry (abstract), testament, underscore, vibrant. Replace with plain words.
 4. **Fancy ways to say "is".** "serves as", "stands as", "boasts", "features". Say "is" or "has".
-5. **"Not just X, but Y."** State the point directly instead.
+5. **Habitual contrast.** "X is Y, not Z", "not X but Y", and "not just X, but Y" can become a mechanical way to frame every point. State the point directly by default. Keep a contrast when it answers a question, corrects an established misunderstanding, or makes a distinction the reader needs. Do not invent an opposing claim for emphasis. When several sentences use this pattern, remove unnecessary contrasts instead of merely varying their wording.
 6. **Rule of three.** Don't force ideas into groups of three. Use the natural number.
 7. **Synonym cycling.** Protagonist, main character, central figure, hero all in one paragraph. Pick one, repeat it.
 8. **False ranges.** "from X to Y" where X and Y aren't on a meaningful scale. List topics directly.

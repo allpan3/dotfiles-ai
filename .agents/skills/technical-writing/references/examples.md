@@ -1,7 +1,9 @@
 # Editorial examples
 
 These examples use synthetic facts. Carry their editorial decisions into new work, not their
-measurements, wording, or section layout. Read the cases relevant to the current document.
+measurements, wording, or section layout. Read the cases relevant to the current document. Some
+revisions remove wording, some add a small amount of context, and some restore missing reasoning.
+Choose the edit that resolves the problem while preserving the needed meaning.
 
 ## Give a blocker appropriate weight
 
@@ -96,3 +98,109 @@ A message title can also suit a findings presentation when it fits the deck's pu
 Show the measurements in a readable chart and identify the test conditions. A claim that memory
 bandwidth causes the limit would exceed the evidence, wherever it appears. A deck for independent
 reading also needs enough explanation for readers to interpret the chart without a speaker.
+
+## Remove indirection
+
+Source notes: the compiler determines which core receives each tensor.
+
+Weak:
+
+> The compiler is responsible for determining how tensors are assigned to cores.
+
+Revised:
+
+> The compiler maps tensors to cores.
+
+The revision uses a conventional verb and removes wording that adds no meaning. A definition of
+mapping would be unnecessary for the intended technical reader.
+
+## State the decisions directly
+
+Source notes: a service assigns each job to a machine and orders the jobs waiting on each machine.
+
+Weak:
+
+> The service performs job-to-machine assignment decision-making and is responsible for determining
+> the execution sequence of jobs that are waiting on each machine.
+
+Revised:
+
+> The service assigns jobs to machines and orders each machine's queue.
+
+The revision names both decisions and is shorter. It does not add an explanation of scheduling
+that the reader already knows. The distinction between assignment and execution order survives.
+
+## Supply context without defining a familiar term
+
+Source notes: a document discusses matrix rank, then considers distributing the computation with
+MPI. The reader knows MPI. The new passage concerns placement of MPI ranks, not matrix rank.
+
+Weak:
+
+> Place ranks to reduce communication.
+
+Revised:
+
+> With MPI, place ranks to reduce communication.
+
+The qualifier establishes which meaning of rank applies. The reader does not need a definition of
+an MPI rank or a tutorial on distributed computing. Familiarity with both topics does not tell the
+reader that the text has moved from one to the other.
+
+## Explain what a list of technical terms leaves unclear
+
+Source notes: two processing stages share one output queue. If the queue is full, either stage
+must wait to send results. The stages have not been tested together.
+
+Weak:
+
+> Shared-queue pressure and producer coordination constrain concurrent-stage utilization.
+
+Revised:
+
+> Both stages must wait to send results when their shared queue is full. Test them together to
+> measure the resulting stalls.
+
+This revision is longer because the original omits the mechanism and the unresolved measurement.
+The added content explains the problem. A general tutorial about queues would add no needed
+information here.
+
+## Keep the condition that determines the conclusion
+
+Source notes: a device receives one item every 10 ms. It can process one item in 2 ms or four
+items together in 5 ms. An item must finish within 8 ms of arriving. Ignore other costs.
+
+Weak:
+
+> Four-item batching improves processing efficiency under latency constraints.
+
+Revised:
+
+> Batching reduces processing time per item, but the first item waits 30 ms, exceeding its 8 ms
+> deadline. Process items as they arrive.
+
+The extra words state the condition that reverses the recommendation. The source notes justify
+immediate processing; these are synthetic timings, not measurements. Further explanation of
+batching would be unnecessary for the intended reader.
+
+## Rebuild a paragraph instead of replacing individual words
+
+Source notes: a project will compare CPU and GPU implementations of an image filter. The GPU
+requires transferring each frame from the CPU. The evaluation must include transfer time and
+energy. No implementation has been selected. The study concerns the filter, not a complete camera.
+
+Weak:
+
+> Backend and frame-transfer optimization motivates a heterogeneous filtering study. CPU and GPU
+> candidates remain in the selection process. Transfer-aware comparison informs implementation
+> choice, with the complete camera outside the evaluation scope.
+
+Revised:
+
+> We will compare CPU and GPU image filters, counting CPU-to-GPU transfer time and energy before
+> selecting an implementation. The study covers the filter, not the complete camera.
+
+The revision directly states the comparison, transfer costs, pending decision and evaluation
+boundary. It is shorter than the original and adds no unsupported speed claim. Rebuilding an
+explanation from its facts need not make it longer. Preserve technical names, quantities and
+conditions when changing the wording or order.
