@@ -99,6 +99,7 @@ the repository.
 | `visual-explainer`  | Automatic or explicit |
 | `reviewable-coding` | Explicit only         |
 | `grilling`         | Explicit only         |
+| `handoff`          | Explicit only         |
 | `interrogate`       | Explicit only, in T3  |
 | `how`               | Explicit only, in T3  |
 | `why`               | Explicit only, in T3  |
@@ -153,6 +154,11 @@ It delegates primary-source research to one background agent and saves cited fin
 in a Markdown note using the repository's conventions. The `background-study worker` role uses
 Sonnet for routine work and Opus otherwise, with the shared model sheet's fallbacks.
 
+Invoke `handoff` explicitly with `/handoff` in Claude or `$handoff` in Codex.
+It saves a conversation handoff in the OS temporary directory. Add the next session's
+focus as an argument to tailor the document; it references existing artifacts instead
+of duplicating them and redacts sensitive information.
+
 ## Attribution
 
 - `technical-writing` is a local workflow informed by
@@ -193,3 +199,8 @@ Sonnet for routine work and Opus otherwise, with the shared model sheet's fallba
   Its description and three-step research procedure are unchanged. Local additions make
   invocation explicit-only and use T3 delegation with the shared model sheet.
   Its [MIT license](t3/skills/background-study/LICENSE) is included.
+
+- `handoff` is from
+  [Matt Pocock's skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md).
+  Its skill instructions and agent metadata are unchanged. Its [MIT license](skills/handoff/LICENSE)
+  is included.
