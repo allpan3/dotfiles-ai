@@ -63,9 +63,10 @@ visible without JavaScript. With JavaScript, only the selected version is shown.
 code regions avoid shifting the rest of the page when switching.
 
 ```html
+<p>The lookup comparison shows how the revised code checks the cache before querying the database.
+  This example assumes valid cached entries and uses <code>undefined</code> to mean a missing entry.</p>
 <figure class="diagram" id="lookup-comparison">
-  <figcaption>The revised lookup uses a cached value before querying the database.
-    This example assumes valid entries and uses undefined to mean a missing entry.</figcaption>
+  <figcaption>Lookup code before and after adding a cache check.</figcaption>
   <div class="controls" data-controls hidden role="group" aria-label="Choose version">
     <button type="button" data-choice="before" aria-pressed="false">Before</button>
     <button type="button" data-choice="after" aria-pressed="true">After</button>
@@ -115,9 +116,11 @@ independent reads of 4 ms each. It assumes no contention or scheduling overhead.
 is `ceil(reads / concurrency) * duration`. One calculation supplies the bar and the explanation.
 
 ```html
+<p>The completion-time model below has eight independent 4 ms reads and assumes no contention or
+  scheduling overhead. Increasing concurrency reduces the number of batches. Completion time is
+  <code>ceil(8 / concurrency) * 4 ms</code>; the control lets you inspect that relationship.</p>
 <figure class="diagram" id="read-model">
-  <figcaption>Illustrative model: eight independent 4 ms reads, with no contention or scheduling
-    overhead. Completion time is ceil(8 / concurrency) multiplied by 4 ms.</figcaption>
+  <figcaption>Illustrative completion time as concurrency changes.</figcaption>
   <div class="controls" data-controls hidden>
     <label for="read-concurrency">Concurrent reads</label>
     <input id="read-concurrency" type="range" min="1" max="4" step="1" value="1">
@@ -165,6 +168,7 @@ measurement or a copy of production behavior.
 ## Verify the behavior
 
 Exercise the controls at their initial, intermediate, and boundary values. Check that every
-related label and figure changes consistently. Use Tab, Enter or Space, and the native range
-keys. Verify visible focus, a readable static state without JavaScript, and normal and narrow
-widths in both themes. Add motion only when it explains behavior and respect reduced motion.
+related label and figure changes consistently. When browser inspection is permitted by the host
+workflow, use Tab, Enter or Space, and the native range keys. Verify visible focus, a readable static
+state without JavaScript, and normal and narrow widths in both themes. Add motion only when it
+explains behavior and respect reduced motion.

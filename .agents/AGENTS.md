@@ -123,7 +123,11 @@ need to understand or review the answer, then stop.
 Choose a structure that serves the reader. Give each section a purpose, use headings that identify
 its subject or function, and make the relationships between ideas clear. Cut repetition, boilerplate,
 routine command logs, and unnecessary headings. Routine replies usually need only a short paragraph
-or two. Use lists, tables, and visuals when they are clearer than prose, not as automatic formatting.
+or two. Follow the current application's presentation requirements. Where it leaves a choice, use
+lists, tables, and visuals when they are clearer than prose.
+Keep charts and diagrams uncluttered, with brief labels and annotations. Prefer surrounding prose
+that refers to the figure for explanations; arrange text and figures in the order that serves the
+reader.
 Keep presented slides and interface text sparse. A deck read independently needs enough explanation
 to stand on its own. Link to supporting detail rather than putting it all in the main text.
 

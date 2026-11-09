@@ -28,10 +28,13 @@ conclusion. For scientific plots intended for export or publication, use standar
   states with text or line patterns as well as color. Distinguish a missing edge from an unknown one.
 - Attach a duration to the interval it measures. Keep units in labels. State whether values are
   measured, calculated, or illustrative; do not invent numbers to make a figure look complete.
-- Use `<figure>` and a claim-bearing `<figcaption>`. Give SVG an accessible title and description.
-  Prefix IDs per figure so arrow markers and accessibility references do not collide.
-- Use `var(--fg)`, `var(--muted)`, `var(--accent)`, and `var(--surface)` from the starter. A status
-  must remain distinguishable without color. Do not assume a white background.
+- Use `<figure>` with a brief `<figcaption>`. Explain the mechanism and conclusion in nearby prose
+  that refers to the figure. Keep graphical labels and annotations short; do not fit explanatory
+  paragraphs into the drawing. Give SVG an accessible title and description. Prefix IDs per figure
+  so arrow markers and accessibility references do not collide.
+- Use the host's theme variables when provided. For standalone pages, the starter provides
+  `var(--fg)`, `var(--muted)`, `var(--accent)`, and `var(--surface)`. A status must remain
+  distinguishable without color. Do not assume a white background.
 - Keep labels readable at the final display size. Wrap a wide SVG in a keyboard-focusable scroll
   region and retain its minimum width. Use `<tspan>` for deliberate line breaks; SVG text does not
   wrap automatically. Draw edges before nodes when their endpoints would otherwise cover labels.
@@ -70,8 +73,10 @@ freshness policy. The database lifeline remains visible so the absence of a call
       </g>
     </svg>
   </div>
-  <figcaption>A successful cache lookup returns the value without contacting the database.</figcaption>
+  <figcaption>Cache-hit sequence.</figcaption>
 </figure>
+<p>In the cache-hit sequence, the cache returns the stored value directly to the client. The
+  database receives no request. This assumes a valid cached entry; a miss would follow another path.</p>
 ```
 
 ## Example: serial and parallel reads
@@ -82,6 +87,9 @@ overhead. A dependency or shared bottleneck would change the result. Keep this a
 when adapting the figure; do not present its idealized numbers as a benchmark.
 
 ```html
+<p>The read schedules compare serial and parallel execution of two independent 4 ms reads.
+  They assume no shared-resource contention or scheduling overhead. The parallel schedule finishes
+  sooner because the reads overlap; the duration of each read is unchanged.</p>
 <figure class="diagram">
   <div role="region" aria-label="Read schedules; scroll if needed" tabindex="0"
        style="overflow-x:auto">
@@ -109,8 +117,7 @@ when adapting the figure; do not present its idealized numbers as a benchmark.
       </g>
     </svg>
   </div>
-  <figcaption>Illustrative independent reads finish at 8 ms serially or 4 ms in parallel,
-    assuming no contention or scheduling overhead.</figcaption>
+  <figcaption>Illustrative serial and parallel read schedules on the same time scale.</figcaption>
 </figure>
 ```
 
@@ -123,5 +130,6 @@ parameter controls. Use a static figure when the reader needs to see all cases a
 
 Compare the figure to its sources, not only to its caption. Follow one normal case and a relevant
 boundary or failure case when the claim covers them. Confirm that direction, order, quantities,
-and omissions support the claim. Then inspect normal and narrow widths in both themes. Check that
-labels fit, arrowheads meet their intended endpoints, and comparisons retain a common scale.
+and omissions support the claim. When browser inspection is permitted by the host workflow, check
+normal and narrow widths in both themes. Check that labels fit, arrowheads meet their intended
+endpoints, and comparisons retain a common scale.

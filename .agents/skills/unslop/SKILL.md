@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: Cut AI tells from any writing.
+description: Write or revise reader-facing prose to remove formulaic phrasing, filler, and awkward compression while preserving meaning and explanatory context.
 ---
 
 # Unslop
@@ -52,8 +52,8 @@ Also apply these rules to your own text for a reader: replies, documents, commen
 
 ### Plain speech
 
-22. **Say what it does, not how it feels.** "the database stays close at hand", "SQL you can read", "types that follow your schema" name a feeling. The fix names the mechanism or a number: "`.toSQL()` returns the exact string sent to the database", "a column rename fails the build". Ask what the sentence tells the reader to do or know, then write that. If you can't restate it as a concrete instruction, fact, or number, cut it. One more check: if the sentence could appear unchanged in another project's docs, it says nothing about this one. Cut it.
-23. **Shorten or split dense sentences.** If the reader has to backtrack to parse a sentence, break it in two or drop clauses. Keep related conditions and consequences together when that makes their relationship clearer.
+22. **Say what it does, not how it feels.** "the database stays close at hand", "SQL you can read", "types that follow your schema" name a feeling. The fix names the mechanism or a number: "`.toSQL()` returns the exact string sent to the database", "a column rename fails the build". Ask what the sentence tells the reader to do or know, then write that. Replace empty claims with information that helps the reader understand or act. Keep definitions, background, examples, and reasoning the intended reader needs, even when they also apply to other projects. Cut a sentence when it adds no useful information, not merely because it is general.
+23. **Shorten or split dense sentences.** If the reader has to backtrack to parse a sentence, break it in two or remove redundant clauses. Keep related conditions and consequences together when that makes their relationship clearer.
 24. **Active voice.** Prefer it. Catch "is/are/was/were + past participle" and name the actor: "queries are validated" becomes "the compiler validates queries", "the file is parsed by the loader" becomes "the loader parses the file". Passive is fine only when the actor is unknown or genuinely doesn't matter.
 25. **Cut adverbs, or use a stronger verb.** "runs quickly" becomes "is fast" or the number, and "significantly improves" becomes the measured delta. An adverb propping up a weak verb means the verb is wrong.
 26. **Prefer the plain word.** "utilize" and "leverage" become "use", "facilitate" becomes "help", "numerous" becomes "many", "in the event that" becomes "if". The fancier synonym is rarely clearer.
