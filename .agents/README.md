@@ -95,23 +95,36 @@ the repository.
 | ------------------- | --------------------- |
 | `unslop`            | Automatic or explicit |
 | `technical-writing` | Automatic or explicit |
+| `research`          | Automatic or explicit |
 | `visual-explainer`  | Automatic or explicit |
 | `reviewable-coding` | Explicit only         |
 | `grilling`         | Explicit only         |
 | `interrogate`       | Explicit only, in T3  |
 | `how`               | Explicit only, in T3  |
 | `why`               | Explicit only, in T3  |
-| `research`          | Explicit only, in T3  |
+| `background-study`  | Explicit only, in T3  |
 
 Use `/unslop` in Claude or `$unslop` in Codex, and similarly for the other names. Automatic use
 depends on the task matching the skill's description. T3-only skills must check for the required T3
 tools before performing orchestration.
+
+Skills with T3 delegation guidance read `~/.agents/t3/models.md` through their own instructions
+or delegation references. General research and grilling use T3 tools there and native delegation
+elsewhere. The research role uses Astra with Fable as fallback. Fallbacks replace unavailable
+assignments; explicit multi-model work uses separate assignments. Invoking a skill keeps the current
+conversation's model; its workflow determines whether subagents are needed.
 
 Use `technical-writing` to plan and revise substantial technical documents and presentation
 content. Its four-stage workflow covers purpose and evidence, planning, structural revision, and
 final delivery, with completion checks and worked examples. It complements `unslop`, which handles
 wording and AI patterns. Use available format-specific skills to produce and inspect documents or
 slides. Shared writing guidance covers routine chat and small wording edits.
+
+Use `research` for academic investigation, literature synthesis, and developing or assessing
+research directions. Invoke `$research <research request>` in Codex or `/research <research request>`
+in Claude. Describe an area, a question, or what to investigate about supplied papers; extra
+constraints and the desired output are optional. A bare invocation asks what to research. It adapts
+the depth and deliverable to the question and distinguishes source evidence from new hypotheses.
 
 Invoke `interrogate` explicitly with `/interrogate` in Claude or `$interrogate` in Codex for
 adversarial or multi-model code review. It reads the `interrogate reviewers` line directly from
@@ -135,9 +148,9 @@ work through a plan or design. The parent conducts the interview. Fact-finding u
 T3 delegation when available, with the `grilling explorer` role in the shared model
 sheet. Other sessions use native subagents, or direct inspection if none are available.
 
-Invoke `research` explicitly with `/research` in Claude or `$research` in Codex in T3.
+Invoke `background-study` explicitly with `/background-study` in Claude or `$background-study` in Codex in T3.
 It delegates primary-source research to one background agent and saves cited findings
-in a Markdown note using the repository's conventions. The `research worker` role uses
+in a Markdown note using the repository's conventions. The `background-study worker` role uses
 Sonnet for routine work and Opus otherwise, with the shared model sheet's fallbacks.
 
 ## Attribution
@@ -175,8 +188,8 @@ Sonnet for routine work and Opus otherwise, with the shared model sheet's fallba
   explicit-only and select T3 or native delegation. Its [MIT license](skills/grilling/LICENSE)
   is included.
 
-- `research` is adapted from
+- `background-study` is adapted from
   [Matt Pocock's skills](https://github.com/mattpocock/skills/blob/main/skills/engineering/research/SKILL.md).
   Its description and three-step research procedure are unchanged. Local additions make
   invocation explicit-only and use T3 delegation with the shared model sheet.
-  Its [MIT license](t3/skills/research/LICENSE) is included.
+  Its [MIT license](t3/skills/background-study/LICENSE) is included.

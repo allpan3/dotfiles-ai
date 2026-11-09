@@ -1,0 +1,5 @@
+interface:
+  display_name: "Background Study"
+  short_description: "Study technical questions in the background"
+policy:
+  allow_implicit_invocation: false

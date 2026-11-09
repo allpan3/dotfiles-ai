@@ -2,7 +2,7 @@
 
 This workflow requires `orchestrator_capabilities`, `delegate_task`, and `task_status`.
 If they are unavailable, report that this workflow needs T3 and stop. Read
-`~/.agents/t3/models.md`, select the `research worker` role, and validate its target
+`~/.agents/t3/models.md`, select the `background-study worker` role, and validate its target
 and options with `orchestrator_capabilities`. Follow the sheet's routine-work selection,
 model fallbacks, quota handling, and replacement rules. Ask for configuration if the
 sheet or role is missing. Omit `target` for `auto` or `inherit-parent`.

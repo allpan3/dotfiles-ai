@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research"
+  short_description: "Investigate a research topic or question"
+  default_prompt: "Use $research to investigate [describe the research question or starting papers]."
