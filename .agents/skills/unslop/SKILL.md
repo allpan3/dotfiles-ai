@@ -44,7 +44,7 @@ comment does not establish that a source claim is wrong.
 
 3. **AI vocabulary.** Additionally, crucial, delve, enduring, enhance, fostering, garner, interplay, intricate, landscape (abstract), pivotal, showcase, tapestry (abstract), testament, underscore, vibrant. Replace with plain words.
 4. **Fancy ways to say "is".** "serves as", "stands as", "boasts", "features". Say "is" or "has".
-5. **Habitual contrast.** "X is Y, not Z", "not X but Y", and "not just X, but Y" can become a mechanical way to frame every point. State the point directly by default. Keep a contrast when it answers a question, corrects an established misunderstanding, or makes a distinction the reader needs. Do not invent an opposing claim for emphasis. When several sentences use this pattern, remove unnecessary contrasts instead of merely varying their wording.
+5. **Habitual contrast and disclaimers.** State the supported claim directly. Avoid repeatedly framing points as "X, not Y", "X rather than Y", or "not just X, but Y". Keep necessary qualifications; reserve contrast for relevant comparisons or established misunderstandings. Do not invent stronger claims to deny. Review the whole passage for repetition; changing the connector or moving the denial to another sentence does not fix the pattern.
 6. **Rule of three.** Don't force ideas into groups of three. Use the natural number.
 7. **Synonym cycling.** Protagonist, main character, central figure, hero all in one paragraph. Pick one, repeat it.
 8. **False ranges.** "from X to Y" where X and Y aren't on a meaningful scale. List topics directly.
