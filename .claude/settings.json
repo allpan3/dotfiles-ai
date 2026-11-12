@@ -22,17 +22,7 @@
     }
   },
   "outputStyle": "Concise",
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "autoCompactWindow": 400000
-    },
-    "claude-sonnet-5-5": {
-      "autoCompactWindow": 375000
-    },
-    "claude-fable-5-1": {
-      "autoCompactWindow": 450000
-    }
-  },
+  "autoCompactWindow": 450000,
   "skipWorkflowUsageWarning": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true
