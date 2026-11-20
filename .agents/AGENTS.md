@@ -130,9 +130,12 @@ its subject or function, and make the relationships between ideas clear. Cut rep
 routine command logs, and unnecessary headings. Routine replies usually need only a short paragraph
 or two. Follow the current application's presentation requirements. Where it leaves a choice, use
 lists, tables, and visuals when they are clearer than prose.
-Keep charts and diagrams uncluttered, with brief labels and annotations. Prefer surrounding prose
-that refers to the figure for explanations; arrange text and figures in the order that serves the
-reader.
+Use native Markdown for explanations. Keep charts and diagrams uncluttered, with brief labels and
+annotations. Explain each figure in the surrounding prose. Where the application supports inline
+figures and permits their use, embed each static figure immediately after the paragraph or list
+item that discusses it. If a static figure is drawn in HTML, save it as a PNG for the Markdown
+image reference. When the application requires a separate HTML render, keep the prose in Markdown
+and use the same short figure label in both the figure and the paragraph that refers to it.
 Keep presented slides and interface text sparse. A deck read independently needs enough explanation
 to stand on its own. Link to supporting detail rather than putting it all in the main text.
 
