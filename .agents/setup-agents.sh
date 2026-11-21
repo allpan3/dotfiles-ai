@@ -25,12 +25,48 @@ collect_skills() {
     done
 }
 
+link_skill() {
+    local source=$1 target=$2 saved=
+    if [[ -L "$target" && $(readlink "$target") == "$source" ]]; then
+        return 0
+    fi
+    if [[ -e "$target" || -L "$target" ]]; then
+        if [[ -z "$backup_dir" ]]; then
+            backup_dir=$(mktemp -d "$HOME/agents-skills-backup.XXXXXX") || return 1
+            printf 'Skill backup directory: %s\n' "$backup_dir"
+        fi
+        saved=$backup_dir/${target#"$HOME"/}
+        mkdir -p -- "$(dirname -- "$saved")" || return 1
+        if [[ -e "$saved" || -L "$saved" ]]; then
+            warn "Skill backup already exists at $saved"
+            return 1
+        fi
+        if ! mv -- "$target" "$saved"; then
+            warn "Could not back up $target to $saved"
+            return 1
+        fi
+        printf 'Backed up %s to %s\n' "$target" "$saved"
+    fi
+    if [[ -e "$target" || -L "$target" ]] || ! ln -sn -- "$source" "$target"; then
+        warn "Could not link $target to $source"
+        if [[ -n "$saved" ]]; then
+            if [[ ! -e "$target" && ! -L "$target" ]] && mv -- "$saved" "$target"; then
+                printf 'Restored %s\n' "$target"
+            else
+                warn "Could not restore $target. Its backup is at $saved"
+            fi
+        fi
+        return 1
+    fi
+    printf 'Linked %s -> %s\n' "$target" "$source"
+}
+
 link_set() {
     local destination=$1 first=$2 last=$3 target resolved expected i
-    mkdir -p -- "$destination"
+    mkdir -p -- "$destination" || return 1
     for target in "$destination"/*; do
         [[ -L "$target" ]] || continue
-        resolved=$(readlink "$target")
+        resolved=$(readlink "$target") || return 1
         case "$resolved" in
             "$root/skills/"*|"$root/t3/skills/"*) ;;
             *) continue ;;
@@ -39,24 +75,14 @@ link_set() {
         for ((i=first; i<last; i++)); do
             [[ ${target##*/} != "${names[$i]}" ]] || expected=${paths[$i]}
         done
-        if [[ "$resolved" != "$expected" ]]; then
-            rm -- "$target"
+        if [[ -z "$expected" ]]; then
+            rm -- "$target" || return 1
             printf 'Removed stale link: %s\n' "$target"
         fi
     done
     for ((i=first; i<last; i++)); do
         target=$destination/${names[$i]}
-        if [[ -L "$target" && $(readlink "$target") == "${paths[$i]}" ]]; then
-            continue
-        fi
-        if [[ -e "$target" || -L "$target" ]]; then
-            rm -rf -- "$target"
-        fi
-        if ! ln -s -- "${paths[$i]}" "$target"; then
-            warn "Could not link $target to ${paths[$i]}"
-            return 1
-        fi
-        printf 'Linked %s -> %s\n' "$target" "${paths[$i]}"
+        link_skill "${paths[$i]}" "$target" || return 1
     done
     printf 'Skills ready: %s (%d skills)\n' "$destination" "$((last - first))"
 }
@@ -87,7 +113,7 @@ link_file() {
 }
 
 main() (
-    local root general total destination physical previous agent i status=0
+    local root general total destination physical previous agent i status=0 backup_dir=
     local names=() paths=() destinations=() starts=() ends=() checked=()
     root=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
     printf 'Setting up agents from %s\n' "$root"
@@ -148,11 +174,7 @@ main() (
         checked+=("$physical")
     done
     for i in "${!destinations[@]}"; do
-        # Keep errexit active inside the subshell while collecting failures.
-        set +e
-        (set -e; link_set "${destinations[$i]}" "${starts[$i]}" "${ends[$i]}")
-        if [[ $? != 0 ]]; then status=1; fi
-        set -e
+        link_set "${destinations[$i]}" "${starts[$i]}" "${ends[$i]}" || status=1
     done
     for destination in "$HOME/.claude-t3/CLAUDE.md" "$HOME/.codex-t3/AGENTS.md"; do
         set +e
